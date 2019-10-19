@@ -1,7 +1,7 @@
 {
-  "name": "firefly-scripts",
+  "name": "magos-scripts",
   "version": "1.0.0",
-  "description": "maint scripts to help developers work with data in firefly apps",
+  "description": "maint scripts to help developers work with data in magos apps",
   "main": "index.js",
   "dependencies": {
     "bluebird": "^3.5.1",

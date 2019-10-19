@@ -1,34 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
-    <title>Firefly</title>
 
-    <!-- sentry tracking -->
-    <script src="https://cdn.ravenjs.com/3.21.0/raven.min.js" crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
+  <title>Superhandy</title>
 
-    <!-- stripe checkout -->
-    <script src="https://checkout.stripe.com/checkout.js"></script>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  
+  <!-- sentry tracking -->
+  <script src="https://cdn.ravenjs.com/3.21.0/raven.min.js" crossorigin="anonymous"></script>
 
-    <!-- facebook/twitter cards for sharing -->
-    <!-- https://css-tricks.com/essential-meta-tags-social-media/ -->
-    <meta property="og:title" content="Firefly">
-    <meta property="og:site_name" content="Firefly">
-    <meta property="og:description" content="Firefly - build web apps fast with React + Firebase">
-    <meta property="og:image" content="/embed_preview.png">
-    <meta property="og:url" content="https://getfirefly.org/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image:alt" content="Firefly">
+  <!-- mapbox -->
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
 
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-  </body>
+  <!-- map icons -->
+  <!-- <link href='https://map-icons.com/dist/css/map-icons.css' rel='stylesheet' /> -->
+
+  <!-- google places -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXB0-Q2fVljOfY4KdWEW8VSBJOa1ieosg&libraries=places"></script>
+
+  <!-- stripe checkout -->
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+
+  <script type="application/javascript">
+    function getIP(json) {
+      window.ip = json.ip
+    }
+  </script>
+
+ <!-- get ip -->
+  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+  <!-- Include only the reset -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.1/themes/reset-min.css" integrity="sha256-JQ2nnTmybhOWSjfV3sa8mG0ZVhTCcORER4cyXc5HL10="
+    crossorigin="anonymous">
+  <!-- or include the full Algolia theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.1/themes/algolia-min.css" integrity="sha256-nkldBwBn2NQqRL1mod7BqHsJ6cEOn6u/ln6F/lI4CFo="
+    crossorigin="anonymous">
+
+  <link href='%PUBLIC_URL%/styles.css' rel='stylesheet' />
+  <script src="https://kit.fontawesome.com/175d855977.js" crossorigin="anonymous"></script>
+
+  <!-- facebook/twitter cards for sharing -->
+  <!-- https://css-tricks.com/essential-meta-tags-social-media/ -->
+  <meta property="og:title" content="Firefly">
+  <meta property="og:site_name" content="Firefly">
+  <meta property="og:description" content="Firefly - build web apps fast with React + Firebase">
+  <meta property="og:image" content="/embed_preview.png">
+  <meta property="og:url" content="https://getfirefly.org/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Firefly">
+
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+</body>
+
 </html>

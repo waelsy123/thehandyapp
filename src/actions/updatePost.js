@@ -3,17 +3,16 @@ import ReactGA from 'react-ga'
 import { prepareDocForUpdate } from './helpers/firestoreHelpers'
 
 const updatePost = (postId, values) => {
-
   ReactGA.event({
     category: 'Post',
-    action: 'Update post',
+    action: 'Update post'
   })
 
   return Firebase.firestore()
     .collection('posts')
     .doc(postId)
     .update(prepareDocForUpdate(values))
-    .catch( error => {
+    .catch(error => {
       alert(`Whoops, couldn't edit the post: ${error.message}`)
     })
 }

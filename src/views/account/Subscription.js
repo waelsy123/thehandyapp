@@ -14,8 +14,8 @@ class Subscription extends React.Component {
       key: process.env.REACT_APP_STRIPE_PUBLIC_KEY,
       locale: 'auto',
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-      name: 'Firefly',
-      description: 'Subscribe to Firefly',
+      name: 'Magos',
+      description: 'Subscribe to Magos',
       email: this.props.auth.email,
       allowRememberMe: false,
       amount: 20 * 100, // in cents
@@ -70,7 +70,7 @@ class Subscription extends React.Component {
           return <p>Updating your subscription...</p>
         }
 
-        const cancelConfirmation = `Are you sure you want to cancel your subscription? You won't have access to paid Firefly features.`
+        const cancelConfirmation = `Are you sure you want to cancel your subscription? You won't have access to paid Magos features.`
 
         return <div>
           <p>You are subscribed!</p>

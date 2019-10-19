@@ -22,10 +22,19 @@ const TextArea = styled.textarea`
   border: 1px solid #ddd;
   margin: 0 0 1rem;
 `
+const SelectInput = styled.select`
+  padding: .5rem;
+  border-radius: 3px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  margin: 0 0 1rem;
+  width: 185px;
+`
 
 export {
   FormRow,
   FormLabel,
   TextInput,
   TextArea,
+  SelectInput,
 }

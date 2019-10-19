@@ -1,6 +1,20 @@
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    match /messages/{post} {
+         allow read, create, update, delete: if true;
+    }
+    
+    match /conversations/{post} {
+      allow read, create, update, delete: if true;
+    }
+    
+    match /userProfiles/{post} {
+      allow read: if true;
+      allow create: if request.auth.uid == request.resource.data.createdBy;
+      allow update, delete: if request.auth.uid == resource.data.createdBy;
+    }
+
     match /posts/{post} {
       allow read: if true;
       allow create: if request.auth.uid == request.resource.data.createdBy;
@@ -8,6 +22,12 @@ service cloud.firestore {
     }
 
     match /postLikes/{postLike} {
+      allow read: if true;
+      allow create: if request.auth.uid == request.resource.data.createdBy;
+      allow update, delete: if request.auth.uid == resource.data.createdBy;
+    }
+
+    match /postRatings/{postRate} {
       allow read: if true;
       allow create: if request.auth.uid == request.resource.data.createdBy;
       allow update, delete: if request.auth.uid == resource.data.createdBy;

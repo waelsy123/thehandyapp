@@ -9,22 +9,26 @@ import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
 
 import App from './views/App'
+import { fetchMyGeo } from './actions/helpers/location'
+import { getCurrentUser, getUserActivity } from './actions/firestoreHelpers'
 
 console.log('create-react-app env:', process.env.NODE_ENV)
-console.log('firefly project:', process.env.REACT_APP_ENV)
+console.log('superhandy project:', process.env.REACT_APP_ENV)
 
-// connect our app to firebase 
+// connect our app to firebase
 const dbConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID
 }
 Firebase.initializeApp(dbConfig)
 
 // temporary config to squash error date warning
 // TODO - remove once this is the firebase default behavior
 // https://firebase.google.com/docs/reference/js/firebase.firestore.Settings#~timestampsInSnapshots
-Firebase.firestore().settings({timestampsInSnapshots: true})
+Firebase.firestore().settings({ timestampsInSnapshots: true })
+
+window.Firebase = Firebase
 
 // Google Analytics
 // https://github.com/react-ga/react-ga#api
@@ -34,5 +38,24 @@ ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID)
 // https://docs.sentry.io/clients/javascript/integrations/react/
 window.Raven.config(process.env.REACT_APP_SENTRY_RAVEN_TRACKING_URL).install()
 
-// render the App component to our document root with React
-ReactDOM.render(<App />, document.getElementById('root'))
+fetchMyGeo()
+
+getCurrentUser()
+  .then(user => {
+    getUserActivity({ userId: user.uid })
+      .then(activity => {
+        window.user = user
+        window.activity = activity
+
+        // render the App component to our document root with React
+        ReactDOM.render(<App />, document.getElementById('root'))
+      })
+      .catch(e => {
+        // render the App component to our document root with React
+        ReactDOM.render(<App />, document.getElementById('root'))
+      })
+  })
+  .catch(e => {
+    // render the App component to our document root with React
+    ReactDOM.render(<App />, document.getElementById('root'))
+  })

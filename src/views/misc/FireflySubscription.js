@@ -1,5 +1,5 @@
 // if the currently logged-in user is a paid subscriber,
-// this will provide their Firefly subscription
+// this will provide their Magos subscription
 
 import React from 'react'
 import FirebaseAuth from './FirebaseAuth'
