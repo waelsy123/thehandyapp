@@ -8,11 +8,7 @@ import { Badge } from 'antd'
 
 class ConversationsList extends React.Component {
   render () {
-    const {
-      onSelectConversation,
-      selectedConversationId,
-      userType
-    } = this.props
+    const { onSelectConversation, selectedConversationId } = this.props
 
     return (
       <FirebaseAuth>
@@ -71,11 +67,6 @@ class ConversationsList extends React.Component {
                           conversations,
                           o => o.updatedOn || o.createdOn
                         ).reverse()
-
-                        console.log(
-                          'TCL: ConversationsList -> render -> conversations',
-                          conversations
-                        )
 
                         return (
                           <div>
@@ -153,7 +144,11 @@ class ConversationsList extends React.Component {
                                                       </h3>
                                                       <span
                                                         style={{
-                                                          color: '#ff7f4c'
+                                                          color:
+                                                            conversation.userId ===
+                                                            window.user.uid
+                                                              ? '#3f8acc'
+                                                              : '#ff7f4c'
                                                         }}
                                                         className='text-primary font-size-sm'
                                                       >

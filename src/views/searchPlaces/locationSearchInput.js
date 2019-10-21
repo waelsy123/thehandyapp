@@ -90,7 +90,7 @@ export default class LocationSearchInput extends React.Component {
         defaultValue={this.props.defaultValue}
       >
         <Input
-          autocomplete='new-password'
+          autoComplete='new-password'
           placeholder={this.props.placeholder || 'Your address'}
           id='googlePlaceSearchBox1'
           suffix={

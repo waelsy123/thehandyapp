@@ -8,6 +8,7 @@ import PostNew from './posts/PostNew'
 import Search from './search/Search'
 import Message from './message/Message'
 import Account from './account/Account'
+import Profile from './account/Profile'
 import PostEdit from './posts/PostEdit'
 import Post from './posts/Post'
 import Error from './misc/Error'
@@ -20,6 +21,7 @@ const Routes = () => (
     <Route path='/search' component={Search} />
     <Route path='/messages' component={Message} />
     <Route path='/account' component={Account} />
+    <Route path='/user/:userId' component={Profile} />
     <Route path='/:slug/edit' component={PostEdit} />
     <Route path='/:slug' component={Post} />
     <Route component={Error} />

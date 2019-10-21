@@ -4,11 +4,7 @@ import 'firebase/auth'
 export const getCurrentUser = async () => {
   return new Promise(function (resolve, reject) {
     Firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        resolve(user)
-      } else {
-        reject('It broke')
-      }
+      resolve(user)
     })
   })
 }

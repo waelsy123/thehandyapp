@@ -10,7 +10,6 @@ class GeoSearch extends React.Component {
 
   fitBoundsToNewRadius = radius => {
     const refinedRadius = radius * 0.8
-    console.log(refinedRadius)
     const centerSfo = new window.google.maps.LatLng(
       this.center.lat,
       this.center.lng
@@ -26,8 +25,6 @@ class GeoSearch extends React.Component {
 
   componentDidMount () {
     const { refine, initialPosition } = this.props
-
-    console.log(initialPosition)
 
     this.center = initialPosition || { lng: 14.43328, lat: 50.081106 }
     this.instance = new window.google.maps.Map(this.el, {
@@ -66,10 +63,19 @@ class GeoSearch extends React.Component {
     const { hits, radius, initialPosition } = this.props
 
     this.center = initialPosition
-    console.log(initialPosition)
 
     this.markers.forEach(marker => {
       marker.setMap(null)
+    })
+
+    this.myLocationPoint && this.myLocationPoint.setMap(null)
+    this.myLocationPoint = new window.google.maps.Marker({
+      position: initialPosition,
+      icon: { url: `/Disc_Plain_blue.svg` },
+      size: new window.google.maps.Size(14, 14),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(0, 140),
+      map: this.instance
     })
 
     this.markerCluster && this.markerCluster.clearMarkers()

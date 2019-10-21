@@ -30,9 +30,7 @@ const Account = () => (
 
         return (
           <div>
-            <Profile auth={auth} />
-            <hr />
-            {/* <Subscription auth={auth} /> */}
+            <Profile auth={auth} userId={auth.uid} />
           </div>
         )
       }}

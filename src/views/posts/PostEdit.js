@@ -6,6 +6,7 @@ import deletePost from '../../actions/deletePost'
 import updatePost from '../../actions/updatePost'
 import PostForm from './PostForm'
 import { Page } from '../../styles/layout'
+import { Button } from 'antd'
 
 const PostEdit = ({ match, history }) => (
   <Page>
@@ -41,11 +42,12 @@ const PostEdit = ({ match, history }) => (
                 }
               />
               <br />
-              <button
+              <Button
+                type='danger'
                 onClick={() => deletePost(post).then(() => history.push(`/`))}
               >
                 Delete activity
-              </button>
+              </Button>
             </div>
           </div>
         )

@@ -17,7 +17,6 @@ class RateElement extends React.Component {
 
   render () {
     const { post, disabled, auth } = this.props
-    console.log(this.props)
 
     if (!auth) {
       return <button disabled>like</button>
@@ -37,17 +36,22 @@ class RateElement extends React.Component {
           const userRating = ratings.filter(
             item => item.createdBy === auth.uid
           )[0]
-          console.log('rating for this buiness: ', ratings)
+
+          const canRate = !userRating && post.createdBy !== auth.uid
 
           return (
             <div>
               <div>
                 <Row type='flex' justify='space-between'>
                   <Col>
-                    <h3>Reviews ({ratings.length})</h3>
+                    <h4 style={{ color: '#37404e' }}>
+                      {canRate && ratings.length === 0
+                        ? 'Be the first to write a review'
+                        : `Reviews (${ratings.length})`}
+                    </h4>
                   </Col>
                   <Col>
-                    {!userRating && (
+                    {canRate && (
                       <div>
                         <Rate
                           onChange={value => {
@@ -64,7 +68,7 @@ class RateElement extends React.Component {
                               ratePost(post, this.state.val, this.state.comment)
                             }
                           }}
-                          style={{ margin: '10px' }}
+                          style={{ marginLeft: '16px' }}
                           type='primary'
                         >
                           Add review
@@ -73,16 +77,22 @@ class RateElement extends React.Component {
                     )}
                   </Col>
                 </Row>
-                {!userRating && (
-                  <TextArea
-                    style={{ width: '100%' }}
-                    name='comment'
-                    onChange={e => {
-                      this.setState({ comment: e.target.value })
-                      console.log(this.state)
-                    }}
-                    defaultValue={this.state.comment}
-                  />
+                {canRate && (
+                  <div className='review-input-container'>
+                    <img
+                      style={{ width: '100%', borderRadius: '90px' }}
+                      src={auth.photoURL}
+                    />
+                    <TextArea
+                      style={{ width: '100%' }}
+                      name='comment'
+                      onChange={e => {
+                        this.setState({ comment: e.target.value })
+                        console.log(this.state)
+                      }}
+                      defaultValue={this.state.comment}
+                    />
+                  </div>
                 )}
               </div>
 
@@ -91,7 +101,6 @@ class RateElement extends React.Component {
               <div>
                 <FirestoreCollection path={'userProfiles'}>
                   {({ error, isLoading, data }) => {
-                    console.log('userProfiles: ', data)
                     const users = data
 
                     return (

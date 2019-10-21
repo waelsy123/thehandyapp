@@ -24,8 +24,8 @@ class SearchPage extends React.Component {
     super(props)
 
     this.state = {
-      // lat: window.geo.latitude,
-      // lng: window.geo.longitude,
+      lat: window.geo.latitude,
+      lng: window.geo.longitude,
       radius: 10000
     }
 
@@ -100,7 +100,7 @@ class SearchPage extends React.Component {
                   <div className='filters'>
                     <div className='filter-item'>
                       <LocationSearchInput
-                        autocomplete='new-password'
+                        autoComplete='new-password'
                         placeholder='Change city'
                         types={['(cities)']}
                         onSelect={this.handleAddressSelect}
@@ -137,7 +137,7 @@ class SearchPage extends React.Component {
                 <div className='filter-group'>
                   <div className='icon-name-wrapper'>
                     <Icon type='star' />
-                    <p>Rate</p>
+                    <p>Rating</p>
                   </div>
                   <div className='filters'>
                     <div className='filter-item'>

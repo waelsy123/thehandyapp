@@ -17,14 +17,12 @@ const Post = ({ match }) => (
   <Page>
     <FirebaseAuth>
       {({ isLoading, error, auth }) => {
-        console.log('TCL: auth', auth)
         return (
           <FirestoreCollection
             path={'posts'}
             filter={['slug', '==', match.params.slug]}
           >
             {({ error, isLoading, data }) => {
-              console.log('TCL: data', data)
               if (error) {
                 return <Error error={error} />
               }
@@ -46,14 +44,28 @@ const Post = ({ match }) => (
               const mapCenter = [post._geoloc.lng, post._geoloc.lat]
               return (
                 <div className='row'>
-                  <div className='col-sm-12 col-md-8'>
+                  <FirebaseAuth>
+                    {({ auth }) =>
+                      auth && post.createdBy === window.user.uid ? (
+                        <div className='col-sm-12 col-md-12 col-lg-12 control-bar-activity'>
+                          <InternalLink to={`/${post.slug}/edit`}>
+                            <Button type='primary'>Edit Activity </Button>
+                          </InternalLink>
+                        </div>
+                      ) : null
+                    }
+                  </FirebaseAuth>
+
+                  <div className='col-sm-12 col-md-8 col-lg-8'>
                     <div width='100%' className='title-wrapper'>
                       <div>
-                        <img
-                          className='activity-logo'
-                          src={avatar}
-                          alt={post.title}
-                        />
+                        <InternalLink to={`/user/${post.createdBy}`}>
+                          <img
+                            className='activity-logo'
+                            src={avatar}
+                            alt={post.title}
+                          />
+                        </InternalLink>
                       </div>
                       <div className='activity-page-block'>
                         <h1 className='activity-title'>{post.title}</h1>
@@ -125,16 +137,6 @@ const Post = ({ match }) => (
 
                   <div className='col-sm-12 col-md-8'>
                     <RatingElement auth={auth} post={post} />
-
-                    <FirebaseAuth>
-                      {({ auth }) =>
-                        auth ? (
-                          <InternalLink to={`/${post.slug}/edit`}>
-                            Edit
-                          </InternalLink>
-                        ) : null
-                      }
-                    </FirebaseAuth>
                   </div>
                 </div>
               )

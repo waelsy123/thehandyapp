@@ -43,7 +43,7 @@
     "live": " sh -ac '. ./.env.live;  firebase use live  && react-scripts build && firebase deploy'"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
-    "eslint-plugin-react": "^7.16.0"
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
   }
 }
