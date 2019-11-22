@@ -406,6 +406,11 @@ body {
   border-radius: 6px;
 }
 
+.conversation-container .conversation-header-container {
+  display: grid;
+  grid-template-columns: 40px auto;
+}
+
 .conversation-container .conversation-content {
   padding: 0 1.5rem 1.5rem;
   overflow-y: auto;
@@ -543,16 +548,30 @@ body {
   display: grid;
 }
 
-.conversation-user-switcher {
-  display: grid;
+.switcher {
+  display: none;
   grid-template-columns: 50% 50%;
 }
 
-.conversation-user-switcher :last-child {
+.visible-only-in-md {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .switcher {
+   display: grid;
+  }
+
+  .visible-only-in-md {
+    display: block;
+  }
+}
+
+.switcher :last-child {
   border-left: 1px;
 }
 
-.conversation-user-switcher Button {
+.switcher Button {
   width: 100%;
   border-radius: 0px;
   border-top: 0px;
@@ -631,4 +650,10 @@ body {
 
 .card-content .activity-info-card .activity-actions {
   display: grid;
+}
+
+@media (max-width: 1200px) {
+  .hidden-in-mobile {
+    display: none;
+  }
 }

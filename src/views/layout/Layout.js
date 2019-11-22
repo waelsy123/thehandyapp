@@ -71,7 +71,7 @@ class AppLayout extends React.Component {
                       <HeaderLink to='/search'>
                         <Button className='search-button-icon' icon='search' />
                       </HeaderLink>
-                      <HeaderLink to='/messages'>
+                      <HeaderLink to='/messages?list=1'>
                         <Badge dot={this.state.newMessages}>
                           <Button
                             className='search-button-icon'

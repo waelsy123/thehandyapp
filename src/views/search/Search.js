@@ -14,7 +14,7 @@ import CustomSortBy from './CustomSortBy'
 import { CustomGeoSearch } from './CustomeGeoSearch'
 import { CustomSearchBox } from './CustomSearchBox'
 import { CustomRatingMenu } from './CustomRatingMenu'
-import { Icon, Input, Select, Rate, Slider } from 'antd'
+import { Icon, Input, Select, Button, Slider } from 'antd'
 import LocationSearchInput from '../searchPlaces/locationSearchInput'
 const { Search } = Input
 const { Option, OptGroup } = Select
@@ -26,7 +26,8 @@ class SearchPage extends React.Component {
     this.state = {
       lat: window.geo.latitude,
       lng: window.geo.longitude,
-      radius: 10000
+      radius: 10000,
+      showMap: false
     }
 
     if (navigator.geolocation) {
@@ -40,6 +41,14 @@ class SearchPage extends React.Component {
     } else {
       console.warn('Geolocation is not supported by this browser.')
     }
+  }
+
+  switchToList = () => {
+    this.setState({ showMap: false })
+  }
+
+  switchToMap = () => {
+    this.setState({ showMap: true })
   }
 
   handleRadiusSelect = radius => {
@@ -150,20 +159,35 @@ class SearchPage extends React.Component {
             </div>
 
             <div className='search-map-container col-xs-12 col-sm-12 col-md-8'>
-              <CustomGeoSearch
-                {...geoSerachConfig}
-                radius={this.state.radius}
-              />
-
-              <CustomSortBy
-                defaultRefinement='posts'
-                items={[
-                  { value: 'posts', label: 'Most relevent' },
-                  { value: 'posts_rating_desc', label: 'Top rated' },
-                  { value: 'posts_rating_count_desc', label: 'Popular' }
-                ]}
-              />
-              <CustomHits />
+              <div className='switcher' style={{ marginBottom: '10px' }}>
+                <Button
+                  icon='bars'
+                  type={this.state.showMap ? '' : 'primary'}
+                  onClick={() => this.switchToList()}
+                />
+                <Button
+                  icon='global'
+                  type={this.state.showMap ? 'primary' : ''}
+                  onClick={() => this.switchToMap()}
+                />
+              </div>
+              <div className={this.state.showMap ? '' : 'hidden-in-mobile'}>
+                <CustomGeoSearch
+                  {...geoSerachConfig}
+                  radius={this.state.radius}
+                />
+              </div>
+              <div className={this.state.showMap ? 'hidden-in-mobile' : ''}>
+                <CustomSortBy
+                  defaultRefinement='posts'
+                  items={[
+                    { value: 'posts', label: 'Most relevent' },
+                    { value: 'posts_rating_desc', label: 'Top rated' },
+                    { value: 'posts_rating_count_desc', label: 'Popular' }
+                  ]}
+                />
+                <CustomHits />
+              </div>
             </div>
           </InstantSearch>
         )}
